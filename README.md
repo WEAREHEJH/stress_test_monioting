@@ -34,12 +34,12 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 
 ## 📚 목차
 
-1. [⚙️ mysqld_exporter 설정](#1%EF%B8%8F⃣-mysqld_exporter-설정)
-2. [🌱 Spring Boot 구성](#2%EF%B8%8F⃣-spring-boot-구성)
-3. [📡 Prometheus 연결](#3%EF%B8%8F⃣-prometheus-연결)
-4. [📈 Grafana 설정](#4%EF%B8%8F⃣-grafana-설정)
-5. [🔥 부하 테스트](#5%EF%B8%8F⃣-부하-테스트)
-6. [📌 PromQL 예시](#6%EF%B8%8F⃣-기타-promql-예시)
+1. [mysqld_exporter 설정](#1%EF%B8%8F⃣-mysqld_exporter-설정)
+2. [Spring Boot 구성](#2%EF%B8%8F⃣-spring-boot-구성)
+3. [Prometheus 연결](#3%EF%B8%8F⃣-prometheus-연결)
+4. [Grafana 설정](#4%EF%B8%8F⃣-grafana-설정)
+5. [부하 테스트](#5%EF%B8%8F⃣-부하-테스트)
+6. [PromQL 예시](#6%EF%B8%8F⃣-기타-promql-예시)
 
 <br>
 <br>
@@ -47,7 +47,7 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 --- 
 
 
-## ⚙️ 기술 스택
+## ⚙️ 아키텍처
 
 <p>
   <img src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
@@ -57,6 +57,9 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
   <img src="https://img.shields.io/badge/grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white">
   <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
 </p>
+<img src="https://github.com/user-attachments/assets/08886f2e-5615-4956-a9fe-156e157129db" width="900" />
+
+
 
 <br>
 <br>

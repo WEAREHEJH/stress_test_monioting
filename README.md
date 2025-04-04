@@ -4,6 +4,17 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 
 또한 부하 테스트를 통해 실제 사용 상황을 시뮬레이션하며, 수집된 데이터를 기반으로 애플리케이션의 안정성과 성능을 분석합니다.
 
+
+<br>
+
+## ✳ 팀원
+
+| <img src="https://avatars.githubusercontent.com/u/193316939?v=4" width="220" />|<img src="https://avatars.githubusercontent.com/u/73926352?v=4" width="220" />|<img src="https://avatars.githubusercontent.com/u/193316939?v=4" width="220"/>|<img src="https://github.com/eundeom.png" width="220" /> |
+|:-:|:-:|:-:|:-:|
+|박재희<br/>[@JaeHee-devSpace](https://github.com/JaeHee-devSpace) |임하은<br/>[@imhaeunim](http://github.com/imhaeunim)|박정호<br/>[@Jeongho427](https://github.com/Jeongho427)|이은정<br/>[@eundeom](https://github.com/eundeom) |
+
+<br>
+
 ## 🎯 프로젝트 목표 (Project Goals)
 
 ✅ **MySQL을 Prometheus에 연결**하여 쿼리 수, 연결 수 등 주요 지표를 수집 및 시각화
@@ -16,15 +27,19 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 
 ✅ **HTTP 요청 부하 및 CPU 부하 테스트를 통해 수집된 메트릭의 반응을 검증**
 
+<br>
+
 ## 📚 목차
 
-1. [⚙️ mysqld_exporter 설정](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-2. [🌱 Spring Boot 구성](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-3. [📡 Prometheus 연결](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-4. [📈 Grafana 설정](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-5. [🔥 부하 테스트](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-6. [📌 PromQL 예시](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
-7. [✅ 정리](https://www.notion.so/1cb89533fa5880c6b6e2e1a561cf3fab?pvs=21)
+1. [⚙️ mysqld_exporter 설정](#%EF%B8%8F-mysqld_exporter-설정)
+2. [🌱 Spring Boot 구성](#-spring-boot-구성)
+3. [📡 Prometheus 연결](#-prometheus-연결)
+4. [📈 Grafana 설정](#-grafana-설정)
+5. [🔥 부하 테스트](#-부하-테스트)
+6. [📌 PromQL 예시](#-기타-promql-예시)
+7. [✅ 정리]()
+
+<br>
 
 ## ⚙️ mysqld_exporter 설정
 
@@ -64,6 +79,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now mysqld_exporter
 systemctl status mysqld_exporter
 ```
+
+<br>
 
 ---
 
@@ -105,6 +122,8 @@ CMD ["java", "-jar", "step07_cicd-0.0.7-SNAPSHOT.jar"]
 docker run -d -p 8080:8080 --name myjar eundeom/myjar
 ```
 
+<br>
+
 ---
 
 ## 📡 Prometheus 연결
@@ -124,6 +143,8 @@ docker run -d -p 8080:8080 --name myjar eundeom/myjar
 sudo systemctl restart prometheus
 ```
 
+<br>
+
 ---
 
 ## 📈 Grafana 설정
@@ -137,6 +158,8 @@ sudo systemctl restart prometheus
 
 - Prometheus 데이터 소스 선택
 - Target IP: `localhost:8080` 또는 컨테이너 내부 IP 사용
+
+<br>
 
 ---
 
@@ -153,6 +176,8 @@ ab -n 10000 -c 100 http://localhost:8080/
 - `c`: 동시 요청 수
 
 Grafana를 통해 JVM 메모리, GC, 요청 처리량 등을 확인 가능
+
+<br>
 
 ---
 

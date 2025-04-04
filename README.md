@@ -40,6 +40,7 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 4. [Grafana 설정](#4%EF%B8%8F⃣-grafana-설정)
 5. [부하 테스트](#5%EF%B8%8F⃣-부하-테스트)
 6. [PromQL 예시](#6%EF%B8%8F⃣-기타-promql-예시)
+7. [트러블슈팅](#7%EF%B8%8F⃣-트러블슈팅)
 
 <br>
 <br>
@@ -68,7 +69,17 @@ Spring Boot 애플리케이션과 MySQL 데이터베이스의 성능 지표를 P
 
 ## 1️⃣ mysqld_exporter 설정
 
+- Prometheus와 MySQL 연동을 위해 설정
+
+- systemd 서비스 등록
+
+  - 서버 재부팅 후 자동 실행 + 관리 편의성 향상
+
+  - MySQL 서버의 성능 지표를 실시간으로 모니터링
+
 ### systemd 서비스 등록
+
+
 
 ```bash
 sudo tee /etc/systemd/system/mysqld_exporter.service <<EOF
@@ -233,3 +244,43 @@ Grafana를 통해 JVM 메모리, GC, 요청 처리량 등을 확인 가능
 | JVM 메모리 사용량 | `jvm_memory_used_bytes` |
 | CPU 사용률 | `rate(process_cpu_seconds_total[1m])` |
 | MySQL 쿼리 수 | `rate(mysql_global_status_queries[1m])` |
+
+<br>
+<br>
+
+---
+
+## 7️⃣ 트러블슈팅
+### 1. Prometheus와 Spring Boot App 연동 실패
+
+![image](https://github.com/user-attachments/assets/c46fc0b2-fdb2-4454-9fc6-460a3402fa67)
+
+
+✔️**해결방안**
+
+- prometheus.yml에 metrics_path 추가
+
+```yaml
+  - job_name: 'myjarapp'
+    static_configs:
+      - targets: ['localhost:8080']
+    metrics_path: '/actuator/prometheus'
+```
+
+- Prometheus가 **`myjarapp`** 에 **`/actuator/prometheus`** 경로로 HTTP 요청을 보내서 메트릭을 수집
+- Spring Boot 애플리케이션에서 **Actuator + Micrometer**를 사용하는 경우, Prometheus 메트릭은 보통 **`/actuator/prometheus`** 경로에 노출
+
+<br>
+
+### 2. 실행 중 권한 문제 발생
+
+`mysqld_exporter` 실행 시 권한 문제가 발생하면, `mysql` 사용자에게 실행 권한을 부여해야 함
+
+✔️**해결방안**
+
+- 사용자 권한 부여
+
+```
+  sudo chown mysql:mysql /etc/.my.cnf
+  sudo chmod 600 /etc/.my.cnf
+```
